@@ -50,12 +50,13 @@ public class Custumers {
     @Override
     public String toString() {
         return "Custumers{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", telNumber=" + telNumber +
                 '}';
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -64,8 +65,8 @@ public class Custumers {
         Custumers custumers = (Custumers) o;
         return getId() == custumers.getId() &&
                 getTelNumber() == custumers.getTelNumber() &&
-                getFirstName().equals(custumers.getFirstName()) &&
-                getLastName().equals(custumers.getLastName());
+                Objects.equals(getFirstName(), custumers.getFirstName()) &&
+                Objects.equals(getLastName(), custumers.getLastName());
     }
 
     @Override
@@ -73,3 +74,4 @@ public class Custumers {
         return Objects.hash(getId(), getFirstName(), getLastName(), getTelNumber());
     }
 }
+

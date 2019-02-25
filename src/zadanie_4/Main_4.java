@@ -14,18 +14,11 @@ public class Main_4 {
         Scanner scanner = new Scanner(file);
 
         while (scanner.hasNextInt()) {
-            int nr = scanner.nextInt();
-            System.out.print(nr + ", ");
-            list.add(nr);
+            list.add(scanner.nextInt());
         }
-        Collection.
-
-
-
-
-
-
-        }
-
+        System.out.println();
+        System.out.println(list);
     }
+
+}
 

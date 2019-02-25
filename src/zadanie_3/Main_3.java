@@ -1,24 +1,14 @@
 package zadanie_3;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.io.IOException;
+import java.util.*;
 
 public class Main_3 {
 
+    public static void main(String[] args) throws IOException {
 
-    public static void main(String[] args) {
-        HashMap<Integer, Custumers> client = new HashMap<>();
-
-        Custumers custumers = new Custumers(154, "ksjfhd", "iseur", 607988984);
-        client.put(custumers.getId(), custumers);
-
-        Custumers custumers1 = new Custumers(153464, "ksjhd", "iseur", 45388984);
-        client.put(custumers1.getId(), custumers1);
-
-        Custumers custumers2 = new Custumers(1544, "sjfhd", "iseur", 63248984);
-        client.put(custumers2.getId(), custumers2);
+        InputClass input = new InputClass();
+        Map<Integer, Custumers> client = input.readData("klienci.csv");
 
         Set<Map.Entry<Integer, Custumers>> entrySet = client.entrySet();
         Collection<Custumers> values = client.values();
@@ -26,25 +16,57 @@ public class Main_3 {
         Set<Integer> integers = client.keySet();
         System.out.println(integers);
 
-      //  Set<Map.Entry<Integer, Custumers>> entrySet1 = client.entrySet();
-
-        for (Map.Entry<Integer, Custumers> integerCustumersEntry : entrySet) {
-            System.out.println(integerCustumersEntry.getKey());
+        for (Map.Entry<Integer, Custumers> iCE : entrySet) {
+            System.out.print(iCE.getKey() + ", ");
         }
+        System.out.println();
 
         for (Custumers value : values) {
             System.out.println(value);
         }
-
-        pytaniaOId(values);
-
-
+        printCustumer(questionOfCustumer(), client);
+//        Collection<Custumers> idCust = printCustumer(questionOfCustumer(), client);
+//        if (idCust == null) {
+//            System.out.println("Nie ma klietna o tym id");
+//        } else {
+//            System.out.println(idCust);
+//        }
     }
 
-    private static void pytaniaOId(Collection<Custumers> values) {
-        System.out.println("podaj id klinta" +
-                "");
+    private static void printCustumer(int questionOfCustumer, Map<Integer, Custumers> client) {
+        Collection<Custumers> idValues = client.values();
+        Collection<Custumers> idVal = null;
+
+        boolean isCuctumer = false;
+        for (Custumers idValue : idValues) {
+            if (idValue.getId() == questionOfCustumer) {
+                isCuctumer = true;
+//                    idVal = (Collection) idValue;
+                System.out.println(idValue);
+            }
+        }
+//        if (!isCuctumer) {
+//            System.out.println("Nie ma klietna o tym id");
+//        }
+//        return idVal;
     }
 
-
+    private static int questionOfCustumer() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Którego klienta wylisować ? podaj ID");
+        int id = 0;
+        boolean ok = false;
+        do {
+            try {
+                id = scanner.nextInt();
+                ok = true;
+            } catch (InputMismatchException e) {
+                System.out.println("podaj liczbę");
+            } finally {
+                scanner.nextLine();
+            }
+        }
+        while (!ok);
+        return id;
+    }
 }
